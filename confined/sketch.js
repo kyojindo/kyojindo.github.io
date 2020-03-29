@@ -78,14 +78,12 @@ class Particle {
 }
 
 let particles = [];
-let soundtrack;
+let washImg;
 
 function setup() {
   
-  // soundtrack = loadSound( 'soundtrack.mp3' );
-  // soundtrack.loop(); // load sountrack
-
   createCanvas( windowWidth, windowHeight );
+  washImg = loadImage( './wash.png' );
   
   for( let i=0; i<width/30; i++ ) {
     
@@ -108,4 +106,6 @@ function draw() {
       particles[i].isTouched( mouseX, mouseY );
     }
   }
+
+  image( washImg, 200, 200 );
 }
