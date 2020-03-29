@@ -84,7 +84,7 @@ let washImg;
 
 function setup() {
   
-  createCanvas( 720, 400 );
+  createCanvas( windowWidth, windowHeight );
   washImg = loadImage( 'wash.png' );
   
   for( let i=0; i<width/30; i++ ) {
