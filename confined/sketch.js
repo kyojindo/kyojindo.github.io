@@ -94,7 +94,7 @@ function setup() {
   washImg = loadImage( 'wash.png' ); // wash picto
   // bgSound.loop(); // put the sound in loop mode
   
-  for( let i=0; i<width/30; i++ ) {
+  for( let i=0; i<width/13; i++ ) {
     
     particles.push( new Particle() );
   }
