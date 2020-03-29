@@ -2,9 +2,6 @@ class Particle {
   
   constructor() {
     
-    if( random( 0, 100 ) < 70 ) this.contam = false;
-    else this.contam = true; // random contamination
-    
     this.x = random( 50, width-50 );
     this.y = random( 50, height-50 );
     
@@ -12,6 +9,9 @@ class Particle {
     this.ySpeed = random( -1.2, 1.2 );
     
     this.d = random( 20, 30 );
+    
+    if( random( 0, 100 ) < 70 ) this.contam = false;
+    else this.contam = true; // random contamination
   }
 
   update() {
@@ -77,15 +77,20 @@ class Particle {
   }
 }
 
-// an array to add
-// multiple particles
-let particles = [];
-let washImg;
+let particles = []; // particles
+let washImg; // wash hands image
+let bgSound; // background sound
+
+function preload() {
+  
+  bgSound = loadSound( 'soundtrack.mp3' );
+}
 
 function setup() {
   
   createCanvas( windowWidth, windowHeight );
-  washImg = loadImage( 'wash.png' );
+  washImg = loadImage( 'wash.png' ); // wash picto
+  bgSound.loop(); // put the sound in loop mode
   
   for( let i=0; i<width/30; i++ ) {
     
@@ -109,4 +114,9 @@ function draw() {
       image( washImg, mouseX-25, mouseY-25, 50, 50 );
     }
   }
+}
+
+function windowResized() {
+  
+  resizeCanvas( windowWidth, windowHeight );
 }
