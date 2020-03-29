@@ -107,5 +107,5 @@ function draw() {
     }
   }
 
-  image( washImg, 200, 200 );
+  image( washImg, mouseX, mouseY, 50, 50 );
 }
