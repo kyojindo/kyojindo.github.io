@@ -70,20 +70,22 @@ class Particle {
     
     let dis = dist( this.x, this.y, mX, mY );
     
-    if( dis < this.d/2 ) {
+    if( dis < 20 ) {
     
       this.contam = false;
     }
   }
 }
 
+// an array to add
+// multiple particles
 let particles = [];
 let washImg;
 
 function setup() {
   
-  createCanvas( windowWidth, windowHeight );
-  washImg = loadImage( './wash.png' );
+  createCanvas( 720, 400 );
+  washImg = loadImage( 'wash.png' );
   
   for( let i=0; i<width/30; i++ ) {
     
@@ -104,8 +106,7 @@ function draw() {
     if( mouseIsPressed ) {
       
       particles[i].isTouched( mouseX, mouseY );
+      image( washImg, mouseX-25, mouseY-25, 50, 50 );
     }
   }
-
-  image( washImg, mouseX, mouseY, 50, 50 );
 }
