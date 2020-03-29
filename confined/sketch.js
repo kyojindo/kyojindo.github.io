@@ -83,7 +83,7 @@ let bgSound; // background sound
 
 function preload() {
   
-  bgSound = loadSound( 'soundtrack.mp3' );
+  bgSound = loadSound( 'https://kyojindo.github.io/confined/soundtrack.mp3' );
 }
 
 function setup() {
