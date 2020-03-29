@@ -79,6 +79,7 @@ class Particle {
 
 let particles = []; // particles
 let washImg; // wash hands image
+
 // let bgSound; // background sound
 
 /*
@@ -92,14 +93,13 @@ function setup() {
   
   createCanvas( windowWidth, windowHeight );
   washImg = loadImage( 'wash.png' ); // wash picto
+
   // bgSound.loop(); // put the sound in loop mode
   
-  for( let i=0; i<width/13; i++ ) {
+  for( let i=0; i<width/14; i++ ) {
     
     particles.push( new Particle() );
   }
-
-  fullscreen( true );
 }
 
 function draw() {
