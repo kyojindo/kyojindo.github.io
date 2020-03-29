@@ -98,6 +98,8 @@ function setup() {
     
     particles.push( new Particle() );
   }
+
+  fullscreen( true );
 }
 
 function draw() {
