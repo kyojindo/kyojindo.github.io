@@ -82,8 +82,8 @@ let soundtrack;
 
 function setup() {
   
-  // soundtrack = loadSound( 'soundtrack.mp3' );
-  // soundtrack.loop(); // load sountrack
+  soundtrack = loadSound( 'soundtrack.mp3' );
+  soundtrack.loop(); // load sountrack
 
   createCanvas( windowWidth, windowHeight );
   
