@@ -79,18 +79,20 @@ class Particle {
 
 let particles = []; // particles
 let washImg; // wash hands image
-let bgSound; // background sound
+// let bgSound; // background sound
 
+/*
 function preload() {
   
   bgSound = loadSound( 'https://kyojindo.github.io/confined/soundtrack.mp3' );
 }
+*/
 
 function setup() {
   
   createCanvas( windowWidth, windowHeight );
   washImg = loadImage( 'wash.png' ); // wash picto
-  bgSound.loop(); // put the sound in loop mode
+  // bgSound.loop(); // put the sound in loop mode
   
   for( let i=0; i<width/30; i++ ) {
     
