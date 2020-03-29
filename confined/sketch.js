@@ -83,7 +83,9 @@ let washImg; // wash hands image
 let nOfContam = 0; // # contam
 let hasWon = false; // has user won?
 let hasLost = false; // has user lost?
-let particuleSpeed = 0.7;
+let particuleSpeed = 0.7; // speed
+
+let level = 0; // level in the game
 
 function setup() {
   
@@ -119,11 +121,12 @@ function draw() {
     }
 
     if( nOfContam >= particles.length ) { hasLost = true; hasWon = false; }
-    if( nOfContam <= 0 ) { hasWon = true; hasLost = false; particuleSpeed += 0.2; }
+    if( nOfContam <= 0 ) { hasWon = true; hasLost = false; particuleSpeed += 0.2; level += 1; }
 
     textSize( 24 );
     noStroke(); fill( 'rgba( 255, 0, 0, 0.6 )' );
     text( nOfContam+' / '+particles.length, 20, 40 );
+    text( 'level = '+level, 20, 70 );
 
   } else {
 
