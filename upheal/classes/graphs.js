@@ -20,7 +20,7 @@ class Node {
     circle( this.xPos, this.yPos, 30 );
 
     textSize( 12 ); noStroke(); fill( 'rgba( 255, 255, 255, 0.6 )' );
-    text( this.name, this.xPos+20, this.yPos+15 ); // draw the name
+    text( this.name, this.xPos+50, this.yPos+3 ); // draw the name
   }
 }
 
