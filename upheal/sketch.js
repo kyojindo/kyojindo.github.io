@@ -1,5 +1,5 @@
 
-let gameWidth = 600; // game window width
+let gameWidth = 1200; // game window width
 let gameHeight = 750; // game window height
 let graph; // graph object for nodes/paths
 
