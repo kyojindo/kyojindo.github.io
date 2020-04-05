@@ -38,9 +38,9 @@ function setup() {
   obstacles = new Group();
   collectibles = new Group();
 
-  for( let i=0; i<4; i++ ) {
+  for( let n=0; n<graph.node.length; n++ ) {
 
-    let box = createSprite( random( 0, width ), random( 0, height ) );
+    let box = createSprite( graph.node[n].xPos, graph.node[n].yPos );
     box.addAnimation( 'normal', 'assets/box0001.png', 'assets/box0003.png' );
     obstacles.add( box );
   }
