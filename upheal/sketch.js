@@ -17,11 +17,11 @@ function setup() {
 
   graph = new Graph(); // instanciate new graph
 
-  graph.addNode( 200, 700, "table" );
-  graph.addNode( 40, 300, "window" );
-  graph.addNode( 530, 400, "door" );
-  graph.addNode( 300, 290, "sink" );
-  graph.addNode( 400, 50, "bed" );
+  graph.addNode( 400, 700, "table" );
+  graph.addNode( 80, 300, "window" );
+  graph.addNode( 1060, 400, "door" );
+  graph.addNode( 600, 290, "sink" );
+  graph.addNode( 800, 50, "bed" );
 
   graph.addPath( "window", "table" );
   graph.addPath( "window", "sink" );
