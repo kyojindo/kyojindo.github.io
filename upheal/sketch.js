@@ -10,6 +10,13 @@ let hoverables; // group of hoverable objects
 let player; // the player in the game
 let goto; // where the player goes
 
+let table;
+
+let isEnterTable = false;
+let wasEnterTable = false;
+let playerHasSteto = false;
+let tableHasSteto = true;
+
 function preload() {
 
   bgImg = loadImage( 'assets/background.png' );
@@ -18,8 +25,6 @@ function preload() {
 function setup() {
 
   createCanvas( gameWidth, gameHeight );
-
-
 
   // ---
 
@@ -32,14 +37,20 @@ function setup() {
   let wall_bottom = createSprite( 755, 685 );
   wall_bottom.addAnimation( 'normal', 'assets/wall_bottom_0001.png', 'assets/wall_bottom_0002.png' );
 
+  table = createSprite( 1144, 694 );
+  table.addAnimation( 'empty', 'assets/table_empty_0001.png', 'assets/table_empty_0002.png' );
+  table.addAnimation( 'steto', 'assets/table_steto_0001.png', 'assets/table_steto_0002.png' );
+
   obstacles.add( wall_top );
   obstacles.add( wall_bottom );
 
   // ---
 
   player = createSprite( 1000, 75, 50, 100 );
-  player.addAnimation( 'standing', 'assets/player_standing_0001.png', 'assets/player_standing_0002.png' );
-  player.addAnimation( 'walking', 'assets/player_walking_0001.png', 'assets/player_walking_0003.png' );
+  player.addAnimation( 'empty_standing', 'assets/player_empty_standing_0001.png', 'assets/player_empty_standing_0002.png' );
+  player.addAnimation( 'empty_walking', 'assets/player_empty_walking_0001.png', 'assets/player_empty_walking_0006.png' );
+  player.addAnimation( 'steto_standing', 'assets/player_steto_standing_0001.png', 'assets/player_steto_standing_0002.png' );
+  player.addAnimation( 'steto_walking', 'assets/player_steto_walking_0001.png', 'assets/player_steto_walking_0006.png' );
   goto = createVector( 1000, 75 ); // start here
 }
 
@@ -63,7 +74,8 @@ function draw() {
 
   if( distMousePlayer > 10 ) {
 
-    player.changeAnimation( 'walking' );
+    if( playerHasSteto ) player.changeAnimation( 'steto_walking' );
+    else player.changeAnimation( 'empty_walking' );
 
     let dirX = ( goto.x-player.position.x );
     let dirY = ( goto.y-player.position.y );
@@ -79,13 +91,32 @@ function draw() {
 
   } else {
 
-    player.changeAnimation( 'standing' );
+    if( playerHasSteto ) player.changeAnimation( 'steto_standing' );
+    else player.changeAnimation( 'empty_standing' );
 
     player.velocity.x = 0;
     player.velocity.y = 0;
   }
 
+  if( tableHasSteto ) table.changeAnimation( 'steto' );
+  else table.changeAnimation( 'empty' );
+
   player.collide( obstacles );
 
-  drawSprites(); // sprites
+  // -- deal with state changes --
+
+  let distTablePlayer = dist( table.position.x, table.position.y, player.position.x, player.position.y );
+
+  if( distTablePlayer < 30 ) isEnterTable = true;
+  else isEnterTable = false; // flag about entering table
+
+  if( isEnterTable == true && wasEnterTable == false ) {
+
+    playerHasSteto = !playerHasSteto;
+    tableHasSteto = !tableHasSteto;
+  }
+
+  drawSprites(); // draw all sprites
+
+  wasEnterTable = isEnterTable;
 }
