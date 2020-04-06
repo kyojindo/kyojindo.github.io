@@ -1,101 +1,91 @@
 
 let gameWidth = 1200; // game window width
 let gameHeight = 750; // game window height
-let graph; // graph object for nodes/paths
 
-// Collisions
-// Collision between groups
-// function called upon collision
+let bgImg; // background image (concrete tiles)
 
-let obstacles;
-let collectibles;
-let asterisk;
+let obstacles; // group of obstacles objects
+let hoverables; // group of hoverable objects
+
+let player; // the player in the game
+let goto; // where the player goes
+
+function preload() {
+
+  bgImg = loadImage( 'assets/background.png' );
+}
 
 function setup() {
 
   createCanvas( gameWidth, gameHeight );
 
-  graph = new Graph(); // instanciate new graph
 
-  graph.addNode( 400, 700, "table" );
-  graph.addNode( 80, 300, "window" );
-  graph.addNode( 1060, 400, "door" );
-  graph.addNode( 600, 290, "sink" );
-  graph.addNode( 800, 50, "bed" );
 
-  graph.addPath( "window", "table" );
-  graph.addPath( "window", "sink" );
-  graph.addPath( "door", "sink" );
-  graph.addPath( "sink", "table" );
-  graph.addPath( "sink", "bed" );
-  graph.addPath( "bed", "door" );
+  // ---
 
-  asterisk = createSprite( 400, 200 ); // create a user-controlled sprite
-  asterisk.addAnimation( 'normal', 'assets/asterisk_normal0001.png', 'assets/asterisk_normal0003.png' );
-  asterisk.addAnimation( 'stretch', 'assets/asterisk_stretching0001.png', 'assets/asterisk_stretching0008.png' );
+  obstacles = new Group(); // we create a group of elements
+  hoverables = new Group(); // we create a group of elements
 
-  // create 2 groups
-  obstacles = new Group();
-  collectibles = new Group();
+  let wall_top = createSprite( 755, 225 );
+  wall_top.addAnimation( 'normal', 'assets/wall_top_0001.png', 'assets/wall_top_0002.png' );
 
-  for( let n=0; n<graph.node.length; n++ ) {
+  let wall_bottom = createSprite( 755, 685 );
+  wall_bottom.addAnimation( 'normal', 'assets/wall_bottom_0001.png', 'assets/wall_bottom_0002.png' );
 
-    let box = createSprite( graph.node[n].xPos, graph.node[n].yPos );
-    box.addAnimation( 'normal', 'assets/ublock_0001.png', 'assets/ublock_0003.png' );
-    obstacles.add( box );
-  }
+  obstacles.add( wall_top );
+  obstacles.add( wall_bottom );
 
-  for( let j=0; j<10; j++ ) {
+  // ---
 
-    let dot = createSprite( random( 0, width ), random( 0, height ) );
-    dot.addAnimation( 'normal', 'assets/small_circle0001.png', 'assets/small_circle0001.png' );
-    collectibles.add( dot );
-  }
+  player = createSprite( 1000, 75, 50, 100 );
+  player.addAnimation( 'standing', 'assets/player_standing_0001.png', 'assets/player_standing_0002.png' );
+  player.addAnimation( 'walking', 'assets/player_walking_0001.png', 'assets/player_walking_0003.png' );
+  goto = createVector( 1000, 75 ); // start here
 }
 
 function draw() {
 
-  background( 30, 30, 30 );
+  clear(); // clear pixels
+  background( 200, 200, 200 );
+  image( bgImg, 0, 0 ); // bg
 
-  graph.draw(); // draw graph
+  // -- deal with mouse clicks --
 
-  // if no arrow input set velocity to 0
-  asterisk.velocity.x = ( mouseX-asterisk.position.x ) / 10;
-  asterisk.velocity.y = ( mouseY-asterisk.position.y ) / 10;
+  if( mouseIsPressed ) {
 
-  // asterisk collides against all
-  // the sprites in the group obstacles
-  asterisk.collide( obstacles );
-
-  //I can define a function to be called upon
-  // collision, overlap, displace or bounce
-  asterisk.overlap( collectibles, collect );
-
-  //if the animation is "stretch" and it reached its last frame
-  if( asterisk.getAnimationLabel() == 'stretch' &&
-  asterisk.animation.getFrame() == asterisk.animation.getLastFrame() ) {
-
-    asterisk.changeAnimation('normal');
+    goto.x = mouseX;
+    goto.y = mouseY;
   }
 
-  drawSprites();
-}
+  // -- deal with player motion --
 
-// the first parameter will be the sprite
-// (individual or from a group) calling the function
-// the second parameter will be the sprite (individual or from a group)
-// against which the overlap, collide, bounce, or displace is checked
+  let distMousePlayer = dist( goto.x, goto.y, player.position.x, player.position.y );
 
-function collect(collector, collected) {
+  if( distMousePlayer > 10 ) {
 
-  // collector is another name
-  // for asterisk show the animation
+    player.changeAnimation( 'walking' );
 
-  collector.changeAnimation( 'stretch' );
-  collector.animation.rewind();
+    let dirX = ( goto.x-player.position.x );
+    let dirY = ( goto.y-player.position.y );
+    let dir = createVector( dirX, dirY );
+    dir.mult( 1.0 / dir.mag() );
+    dir.mult( 5.0 ); // speed
 
-  // collected is the sprite in the group
-  // collectibles that triggered the event
+    player.velocity.x = dir.x;
+    player.velocity.y = dir.y;
 
-  collected.remove();
+    if( goto.x < player.position.x-10 ) player.mirrorX( 1 );
+    else if( goto.x > player.position.x+10 ) player.mirrorX( -1 );
+
+  } else {
+
+    player.changeAnimation( 'standing' );
+
+    player.velocity.x = 0;
+    player.velocity.y = 0;
+  }
+
+  player.collide( obstacles );
+
+  drawSprites(); // sprites
 }
