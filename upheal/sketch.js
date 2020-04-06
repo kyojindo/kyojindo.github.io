@@ -41,7 +41,7 @@ function setup() {
   for( let n=0; n<graph.node.length; n++ ) {
 
     let box = createSprite( graph.node[n].xPos, graph.node[n].yPos );
-    box.addAnimation( 'normal', 'assets/box0001.png', 'assets/box0003.png' );
+    box.addAnimation( 'normal', 'assets/ublock_0001.png', 'assets/ublock_0003.png' );
     obstacles.add( box );
   }
 
