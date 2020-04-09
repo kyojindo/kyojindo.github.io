@@ -5,53 +5,78 @@ class Player {
 
   constructor( x, y, wid, hei ) {
 
-    this.body = createSprite( x, y, wid, hei ); this.body.depth = 1; // body sprite (layer 1)
-    this.body.addAnimation( 'stand', 'assets/player_body_stand_0001.png', 'assets/player_body_stand_0002.png' );
-    this.body.addAnimation( 'walk', 'assets/player_body_walk_0001.png', 'assets/player_body_walk_0004.png' );
+
+    this.body = createSprite( x, y, wid, hei ); this.body.depth = 2; // body sprite
+    this.body.addAnimation( 'stand_good', 'assets/player_body_stand_good_0001.png', 'assets/player_body_stand_good_0002.png' );
+    this.body.addAnimation( 'walk_good', 'assets/player_body_walk_good_0001.png', 'assets/player_body_walk_good_0004.png' );
+    this.body.addAnimation( 'stand_cont', 'assets/player_body_stand_cont_0001.png', 'assets/player_body_stand_cont_0002.png' );
+    this.body.addAnimation( 'walk_cont', 'assets/player_body_walk_cont_0001.png', 'assets/player_body_walk_cont_0004.png' );
 
     this.layers = []; // an array of all layers, so as to set properties to all of them
 
-    this.gown = createSprite( x, y, wid, hei ); this.gown.depth = 2; // gown sprite (layer 2)
-    this.gown.addAnimation( 'normal', 'assets/player_gown_normal_0001.png', 'assets/player_gown_normal_0002.png' );
+    this.gown = createSprite( x, y, wid, hei ); this.gown.depth = 3; // gown sprite
+    this.gown.addAnimation( 'good', 'assets/player_gown_good_0001.png', 'assets/player_gown_good_0002.png' );
+    this.gown.addAnimation( 'cont', 'assets/player_gown_cont_0001.png', 'assets/player_gown_cont_0002.png' );
     this.layers.push( this.gown ); // add gown to layers
 
-    this.mask = createSprite( x, y, wid, hei ); this.mask.depth = 3; // mask sprite (layer 3)
-    this.mask.addAnimation( 'normal', 'assets/player_mask_normal_0001.png', 'assets/player_mask_normal_0002.png' );
+    this.mask = createSprite( x, y, wid, hei ); this.mask.depth = 4; // mask sprite
+    this.mask.addAnimation( 'good', 'assets/player_mask_good_0001.png', 'assets/player_mask_good_0002.png' );
+    this.mask.addAnimation( 'cont', 'assets/player_mask_cont_0001.png', 'assets/player_mask_cont_0002.png' );
     this.layers.push( this.mask ); // add mask to layers
 
-    this.shield = createSprite( x, y, wid, hei ); this.shield.depth = 4; // shield sprite (layer 4)
-    this.shield.addAnimation( 'normal', 'assets/player_shield_normal_0001.png', 'assets/player_shield_normal_0002.png' );
+    this.shield = createSprite( x, y, wid, hei ); this.shield.depth = 5; // shield sprite
+    this.shield.addAnimation( 'good', 'assets/player_shield_good_0001.png', 'assets/player_shield_good_0002.png' );
+    this.shield.addAnimation( 'cont', 'assets/player_shield_cont_0001.png', 'assets/player_shield_cont_0002.png' );
     this.layers.push( this.shield ); // add shield to layers
 
-    this.steto = createSprite( x, y, wid, hei ); this.steto.depth = 5; // steto sprite (layer 4)
-    this.steto.addAnimation( 'normal', 'assets/player_steto_normal_0001.png', 'assets/player_steto_normal_0002.png' );
+    this.steto = createSprite( x, y, wid, hei ); this.steto.depth = 6; // steto sprite
+    this.steto.addAnimation( 'good', 'assets/player_steto_good_0001.png', 'assets/player_steto_good_0002.png' );
+    this.steto.addAnimation( 'cont', 'assets/player_steto_cont_0001.png', 'assets/player_steto_cont_0002.png' );
     this.layers.push( this.steto ); // add steto to layers
 
-    this.report = createSprite( x, y, wid, hei ); this.report.depth = 5; // report sprite (layer 4)
-    this.report.addAnimation( 'normal', 'assets/player_report_normal_0001.png', 'assets/player_report_normal_0002.png' );
+    this.report = createSprite( x, y, wid, hei ); this.report.depth = 7; // report sprite
+    this.report.addAnimation( 'good', 'assets/player_report_good_0001.png', 'assets/player_report_good_0002.png' );
+    this.report.addAnimation( 'cont', 'assets/player_report_cont_0001.png', 'assets/player_report_cont_0002.png' );
     this.layers.push( this.report ); // add report to layers
 
-    this.phone = createSprite( x, y, wid, hei ); this.phone.depth = 5; // report sprite (layer 4)
-    this.phone.addAnimation( 'normal', 'assets/player_phone_normal_0001.png', 'assets/player_phone_normal_0002.png' );
+    this.phone = createSprite( x, y, wid, hei ); this.phone.depth = 8; // report sprite
+    this.phone.addAnimation( 'good', 'assets/player_phone_good_0001.png', 'assets/player_phone_good_0002.png' );
+    this.phone.addAnimation( 'cont', 'assets/player_phone_cont_0001.png', 'assets/player_phone_cont_0002.png' );
     this.layers.push( this.phone ); // add phone to layers
 
-    this.hands = createSprite( x, y, wid, hei ); this.hands.depth = 6; // hands sprite (layer 3)
-    this.hands.addAnimation( 'stand', 'assets/player_hands_stand_0001.png', 'assets/player_hands_stand_0002.png' );
-    this.hands.addAnimation( 'walk', 'assets/player_hands_walk_0001.png', 'assets/player_hands_walk_0004.png' );
+    this.hands = createSprite( x, y, wid, hei ); this.hands.depth = 9; // hands sprite
+    this.hands.addAnimation( 'stand_good', 'assets/player_hands_stand_good_0001.png', 'assets/player_hands_stand_good_0002.png' );
+    this.hands.addAnimation( 'walk_good', 'assets/player_hands_walk_good_0001.png', 'assets/player_hands_walk_good_0004.png' );
+    this.hands.addAnimation( 'stand_cont', 'assets/player_hands_stand_cont_0001.png', 'assets/player_hands_stand_cont_0002.png' );
+    this.hands.addAnimation( 'walk_cont', 'assets/player_hands_walk_cont_0001.png', 'assets/player_hands_walk_cont_0004.png' );
     this.layers.push( this.hands ); // add hands to layers
+
+    this.gloves = createSprite( x, y, wid, hei ); this.gloves.depth = 10; // gloves sprite
+    this.gloves.addAnimation( 'stand_good', 'assets/player_gloves_stand_good_0001.png', 'assets/player_gloves_stand_good_0002.png' );
+    this.gloves.addAnimation( 'walk_good', 'assets/player_gloves_walk_good_0001.png', 'assets/player_gloves_walk_good_0004.png' );
+    this.gloves.addAnimation( 'stand_cont', 'assets/player_gloves_stand_cont_0001.png', 'assets/player_gloves_stand_cont_0002.png' );
+    this.gloves.addAnimation( 'walk_cont', 'assets/player_gloves_walk_cont_0001.png', 'assets/player_gloves_walk_cont_0004.png' );
+    this.layers.push( this.gloves ); // add gloves to layers
 
     this.isWalking = false; // is the player walking or not?
 
     this.hasGown = false; // does the player wears the gown?
     this.hasMask = false; // does the player wears the mask?
     this.hasShield = false; // does the player wears the shield?
-
+    this.hasGloves = false; // does the player wears the shield?
     this.hasSteto = false; // does the player has the steto?
     this.hasReport = false; // does the player has the report?
     this.hasPhone = true; // does the player has the phone?
 
-    this.wasInObject = false;
-    this.isInObject = false;
+    this.isBodyContamined = false; // is this body contamined?
+    this.isHandsContamined = false; // are these hands contamined?
+    this.isGownContamined = false; // is this object contamined?
+    this.isMaskContamined = false; // is this object contamined?
+    this.isShieldContamined = false; // is this object contamined?
+    this.isGlovesContamined = false; // is this object contamined?
+    this.isStetoContamined = false; // is this object contamined?
+    this.isReportContamined = false; // is this object contamined?
+    this.isPhoneContamined = false; // is this object contamined?
   }
 
   update( goto, obstacles, actionables ) {
@@ -101,6 +126,47 @@ class Player {
 
     // -- deal with animation in sprites --
 
+    if( this.isGownContamined ) this.gown.changeAnimation( 'cont' );
+    else this.gown.changeAnimation( 'good' ); // check contamination
+
+    if( this.isMaskContamined ) this.mask.changeAnimation( 'cont' );
+    else this.mask.changeAnimation( 'good' ); // check contamination
+
+    if( this.isShieldContamined ) this.shield.changeAnimation( 'cont' );
+    else this.shield.changeAnimation( 'good' ); // check contamination
+
+    if( this.isStetoContamined ) this.steto.changeAnimation( 'cont' );
+    else this.steto.changeAnimation( 'good' ); // check contamination
+
+    if( this.isReportContamined ) this.report.changeAnimation( 'cont' );
+    else this.report.changeAnimation( 'good' ); // check contamination
+
+    if( this.isPhoneContamined ) this.phone.changeAnimation( 'cont' );
+    else this.phone.changeAnimation( 'good' ); // check contamination
+
+    if( this.isWalking ) { // walk animation
+
+      if( this.isBodyContamined ) this.body.changeAnimation( 'walk_cont' );
+      else this.body.changeAnimation( 'walk_good' ); // check contamination
+
+      if( this.isHandsContamined ) this.hands.changeAnimation( 'walk_cont' );
+      else this.hands.changeAnimation( 'walk_good' ); // check contamination
+
+      if( this.isGlovesContamined ) this.gloves.changeAnimation( 'walk_cont' );
+      else this.gloves.changeAnimation( 'walk_good' ); // check contamination
+
+    } else { // stand animation
+
+      if( this.isBodyContamined ) this.body.changeAnimation( 'stand_cont' );
+      else this.body.changeAnimation( 'stand_good' ); // check contamination
+
+      if( this.isHandsContamined ) this.hands.changeAnimation( 'stand_cont' );
+      else this.hands.changeAnimation( 'stand_good' ); // check contamination
+
+      if( this.isGlovesContamined ) this.gloves.changeAnimation( 'stand_cont' );
+      else this.gloves.changeAnimation( 'stand_good' ); // check contamination
+    }
+
     if( this.hasGown ) this.gown.visible = true;
     else this.gown.visible = false; // see gown?
 
@@ -109,6 +175,9 @@ class Player {
 
     if( this.hasShield ) this.shield.visible = true;
     else this.shield.visible = false; // see gown?
+
+    if( this.hasGloves ) { this.gloves.visible = true; this.hands.visible = false; }
+    else { this.gloves.visible = false; this.hands.visible = true; } // see gown?
 
     if( this.hasSteto ) this.steto.visible = true;
     else this.steto.visible = false; // see gown?
@@ -119,88 +188,111 @@ class Player {
     if( this.hasPhone ) this.phone.visible = true;
     else this.phone.visible = false; // see gown?
 
-    if( this.isWalking ) { // walk animation
-
-      this.body.changeAnimation( 'walk' );
-      this.hands.changeAnimation( 'walk' );
-
-    }
-    else { // stand animation
-
-      this.body.changeAnimation( 'stand' );
-      this.hands.changeAnimation( 'stand' );
-    }
-
     // -- deal with state changes --
 
     actionables.forEach( ( actionable ) => {
 
       let actDist = dist( actionable.surface.position.x, actionable.surface.position.y, this.body.position.x, this.body.position.y );
-      if( actDist < 30 ) this.isInObject = true; else this.isInObject = false; // evaluate distance to object and flag if collide
+      if( actDist < 30 ) { actionable.isPlayerEntered = true; } else { actionable.isPlayerEntered = false; } // flag if collide
 
-      if( this.isInObject == true && this.wasInObject == false ) {
+      if( actionable.isPlayerEntered == true && actionable.wasPlayerEntered == false ) {
 
         this.onAction( actionable );
       }
     })
 
-    this.wasInObject = this.isInObject;
+    // -- deal with contamination --
+
+    if( this.hasSteto && this.isStetoContamined && !this.hasGown ) this.isBodyContamined = true;
+    if( this.hasSteto && this.isStetoContamined && this.hasGown ) this.isGownContamined = true;
+    if( this.hasSteto && this.isBodyContamined && !this.hasGown ) this.isStetoContamined = true;
+    if( this.hasSteto && this.isGownContamined && this.hasGown ) this.isStetoContamined = true;
+
+    if( this.hasPhone && this.isPhoneContamined && !this.hasGloves ) this.isHandsContamined = true;
+    if( this.hasPhone && this.isPhoneContamined && this.hasGloves ) this.isGlovesContamined = true;
+    if( this.hasPhone && this.isHandsContamined && !this.hasGloves ) this.isPhoneContamined = true;
+    if( this.hasPhone && this.isGlovesContamined && this.hasGloves ) this.isPhoneContamined = true;
+
+    if( this.hasReport && this.isReportContamined && !this.hasGloves ) this.isHandsContamined = true;
+    if( this.hasReport && this.isReportContamined && this.hasGloves ) this.isGlovesContamined = true;
+    if( this.hasReport && this.isHandsContamined && !this.hasGloves ) this.isReportContamined = true;
+    if( this.hasReport && this.isGlovesContamined && this.hasGloves ) this.isReportContamined = true;
+
+    if( this.isHandsContamined ) {
+
+      // 20% chance to infect body if hands are contaminated
+      if( random( 10000 ) > 9990 ) this.isBodyContamined = true;
+    }
   }
 
   onAction( actionable ) { // -- action callback --
 
-    if( actionable.hasSteto ) { // steto on table
+    if( actionable.name == 'table' ) {
 
-      this.hasPhone = false; // player drops phone
-      actionable.hasPhone = true; // right on the table
+      if( actionable.hasSteto ) { // steto on table
 
-      this.hasGown = true; // player puts the gown
-      this.hasMask = true; // player puts the mask
-      this.hasShield = true; // player puts the shield
+        this.hasPhone = false; // player drops phone
+        actionable.hasPhone = true; // right on the table
+        actionable.isPhoneContamined = this.isPhoneContamined;
 
-      this.hasSteto = true; // player takes steto
-      actionable.hasSteto = false; // from the table
+        this.hasGown = true; // player puts the gown
+        this.hasMask = true; // player puts the mask
+        this.hasShield = true; // player puts the shield
 
-    } else {
+        if( random( 1000) > 500 ) this.hasGloves = true; // player
+        else this.hasGloves = false; // sometimes puts the gloves
 
-      this.hasSteto = false; // player drops steto
-      actionable.hasSteto = true; // right on the table
+        this.isGownContamined = false; // new object here
+        this.isMaskContamined = false; // new object here
+        this.isShieldContamined = false; // new object here
+        this.isGlovesContamined = false; // new object here
 
-      this.hasGown = false; // player throws the gown
-      this.hasMask = false; // player throws the mask
-      this.hasShield = false; // player throws the shield
+        this.hasSteto = true; // player takes steto
+        actionable.hasSteto = false; // from the table
+        this.isStetoContamined = actionable.isStetoContamined;
 
-      this.hasPhone = true; // player takes phone
-      actionable.hasPhone = false; // from the table
+      } else {
+
+        this.hasSteto = false; // player drops steto
+        actionable.hasSteto = true; // right on the table
+        this.isPhoneContamined = actionable.isPhoneContamined;
+
+        this.hasGown = false; // player throws the gown
+        this.hasMask = false; // player throws the mask
+        this.hasShield = false; // player throws the shield
+        this.hasGloves = false; // player throws the gloves
+
+        this.hasPhone = true; // player takes phone
+        actionable.hasPhone = false; // from the table
+        actionable.isStetoContamined = this.isStetoContamined;
+      }
     }
-  }
-}
 
-class Table {
+    if( actionable.name == 'virus' ) {
 
-  constructor( x, y ) {
+      // -- action for protective equipment --
+      if( actionable.isSurfaceContamined == true ) {
 
-    this.surface = createSprite( x, y ); this.surface.depth = 0; // create the sprite for the table surface
-    this.surface.addAnimation( 'normal', 'assets/table_surface_normal_0001.png', 'assets/table_surface_normal_0002.png' );
+        if( this.hasMask ) this.isMaskContamined = true;
+        else this.isBodyContamined = true; // mask or body
 
-    this.steto = createSprite( x, y ); this.steto.depth = 1; // create the sprite for the table surface
-    this.steto.addAnimation( 'normal', 'assets/table_steto_normal_0001.png', 'assets/table_steto_normal_0002.png' );
+        if( this.hasGown ) this.isGownContamined = true;
+        else this.isBodyContamined = true; // mask or body
 
-    this.phone = createSprite( x, y ); this.phone.depth = 1; // create the sprite for the table surface
-    this.phone.addAnimation( 'normal', 'assets/table_phone_normal_0001.png', 'assets/table_phone_normal_0002.png' );
+        if( this.hasShield ) {
 
-    this.hasSteto = true; // rudimentary state machine for stetoscope
-    this.hasPhone = false; // rudimentary state machine for phone
+          this.isShieldContamined = true;
+          this.isMaskContamined = false;
 
-    this.name = "table";
-  }
+        } else this.isBodyContamined = true; // mask or body
 
-  update() {
+        if( this.hasGloves ) this.isGlovesContamined = true;
+        else this.isHandsContamined = true; // mask or body
 
-    if( this.hasSteto ) this.steto.visible = true;
-    else this.steto.visible = false;
-
-    if( this.hasPhone ) this.phone.visible = true;
-    else this.phone.visible = false;
+        if( this.hasSteto ) this.isStetoContamined = true;
+        if( this.hasReport ) this.isReportContamined = true;
+        if( this.hasPhone ) this.isPhoneContamined = true;
+      }
+    }
   }
 }

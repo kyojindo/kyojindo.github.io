@@ -3,19 +3,14 @@ let gameWidth = 1200; // game window width
 let gameHeight = 750; // game window height
 let tiling; // background image (tiles)
 
-let goto; // where the player goes
-let player; // the player in the game
-let obstacles; // obstacle objects group
-let actionables = []; // actionable objects
-
-let isEnterTable = false;
-let wasEnterTable = false;
-let tableHasSteto = true;
+let goto; // where player goes
+let player; // player in the game
+let obstacles; // obstacle objects
+let surfaces = []; // surface objects
 
 function preload() {
 
   obstacles = new Group(); // we create a group of elements
-  actionables = new Group(); // we create a group of elements
 
   tiling = loadImage( 'assets/background.png' ); // load background image
 
@@ -27,10 +22,15 @@ function preload() {
   wall_bottom.addAnimation( 'normal', 'assets/wall_bottom_0001.png', 'assets/wall_bottom_0002.png' );
   obstacles.add( wall_bottom ); // add wall bottom as an obstacle
 
-  let table = new Table( 95, 45 ); // create the table as an object
-  actionables.push( table ); // push it as an action-enabled in array
+  let table = new Surface( 95, 45, 'table' ); // create the table as an object
+  table.hasSteto = true; // tailor a specific set of objects to this table
+  surfaces.push( table ); // push it as an action-enabled object in array
 
-  player = new Player( 1000, 75, 50, 100 ); // load player object assets
+  let virus = new Surface( 55, 695, 'virus' );
+  virus.isSurfaceContamined = true; // daaaah!
+  surfaces.push( virus );
+
+  player = new Player( 1000, 75, 50, 100 ); // load player object
 }
 
 function setup() {
@@ -48,8 +48,8 @@ function draw() {
   // convert mouse clicks into the next place player goes
   if( mouseIsPressed ) { goto.x = mouseX; goto.y = mouseY; }
 
-  player.update( goto, obstacles, actionables );
-  actionables[0].update();
+  player.update( goto, obstacles, surfaces );
+  surfaces.forEach( ( surface ) => { surface.update(); } )
 
   drawSprites(); // draw all sprites
 }
