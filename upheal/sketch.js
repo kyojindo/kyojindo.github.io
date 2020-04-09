@@ -27,7 +27,7 @@ function preload() {
   wall_bottom.addAnimation( 'normal', 'assets/wall_bottom_0001.png', 'assets/wall_bottom_0002.png' );
   obstacles.add( wall_bottom ); // add wall bottom as an obstacle
 
-  let table = new Table( 1144, 694 ); // create the table as an object
+  let table = new Table( 95, 45 ); // create the table as an object
   actionables.push( table ); // push it as an action-enabled in array
 
   player = new Player( 1000, 75, 50, 100 ); // load player object assets

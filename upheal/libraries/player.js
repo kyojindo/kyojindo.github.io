@@ -135,7 +135,7 @@ class Player {
 
     actionables.forEach( ( actionable ) => {
 
-      let actDist = dist( actionable.object.position.x, actionable.object.position.y, this.body.position.x, this.body.position.y );
+      let actDist = dist( actionable.surface.position.x, actionable.surface.position.y, this.body.position.x, this.body.position.y );
       if( actDist < 30 ) this.isInObject = true; else this.isInObject = false; // evaluate distance to object and flag if collide
 
       if( this.isInObject == true && this.wasInObject == false ) {
@@ -180,10 +180,14 @@ class Table {
 
   constructor( x, y ) {
 
-    this.object = createSprite( x, y ); this.object.depth = 0; // create the sprite for the table
+    this.surface = createSprite( x, y ); this.surface.depth = 0; // create the sprite for the table surface
+    this.surface.addAnimation( 'normal', 'assets/table_surface_normal_0001.png', 'assets/table_surface_normal_0002.png' );
 
-    this.object.addAnimation( 'empty', 'assets/table_empty_0001.png', 'assets/table_empty_0002.png' );
-    this.object.addAnimation( 'steto', 'assets/table_steto_0001.png', 'assets/table_steto_0002.png' );
+    this.steto = createSprite( x, y ); this.steto.depth = 1; // create the sprite for the table surface
+    this.steto.addAnimation( 'normal', 'assets/table_steto_normal_0001.png', 'assets/table_steto_normal_0002.png' );
+
+    this.phone = createSprite( x, y ); this.phone.depth = 1; // create the sprite for the table surface
+    this.phone.addAnimation( 'normal', 'assets/table_phone_normal_0001.png', 'assets/table_phone_normal_0002.png' );
 
     this.hasSteto = true; // rudimentary state machine for stetoscope
     this.hasPhone = false; // rudimentary state machine for phone
@@ -193,7 +197,10 @@ class Table {
 
   update() {
 
-    if( this.hasSteto ) this.object.changeAnimation( 'steto' );
-    else this.object.changeAnimation( 'empty' );
+    if( this.hasSteto ) this.steto.visible = true;
+    else this.steto.visible = false;
+
+    if( this.hasPhone ) this.phone.visible = true;
+    else this.phone.visible = false;
   }
 }
