@@ -1,4 +1,5 @@
 
+let hasTouchScreen = false; // touch device?
 let gameWidth = 1200; // game window width
 let gameHeight = 750; // game window height
 let tiling; // background image (tiles)
@@ -9,6 +10,45 @@ let obstacles; // obstacle objects
 let surfaces = []; // surface objects
 
 function preload() {
+
+  // first thing first, we test if the game
+  // is open on mobile device => not available
+
+  if( "maxTouchPoints" in navigator ) {
+
+    hasTouchScreen = navigator.maxTouchPoints > 0;
+
+  } else if( "msMaxTouchPoints" in navigator ) {
+
+    hasTouchScreen = navigator.msMaxTouchPoints > 0;
+
+  } else {
+
+    var mQ = window.matchMedia && matchMedia( "(pointer:coarse)" );
+
+    if( mQ && mQ.media === "(pointer:coarse)" ) {
+
+      hasTouchScreen = !!mQ.matches;
+
+    } else if( 'orientation' in window ) {
+
+      hasTouchScreen = true; // deprecated, but good fallback
+
+    } else {
+
+      // only as a last resort, fall
+      // back to user agent sniffing
+
+      var UA = navigator.userAgent;
+
+      hasTouchScreen = (
+        /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
+        /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA)
+      );
+    }
+  }
+
+  // here we pre-load all the assets
 
   obstacles = new Group(); // we create a group of elements
 
@@ -43,13 +83,17 @@ function draw() {
 
   clear(); // clear & tiling
   background( 200, 200, 200 );
-  image( tiling, 0, 0 );
 
-  // convert mouse clicks into the next place player goes
-  if( mouseIsPressed ) { goto.x = mouseX; goto.y = mouseY; }
+  if( !hasTouchScreen ) {
 
-  player.update( goto, obstacles, surfaces );
-  surfaces.forEach( ( surface ) => { surface.update(); } )
+    image( tiling, 0, 0 );
 
-  drawSprites(); // draw all sprites
+    // convert mouse clicks into the next place player goes
+    if( mouseIsPressed ) { goto.x = mouseX; goto.y = mouseY; }
+
+    player.update( goto, obstacles, surfaces );
+    surfaces.forEach( ( surface ) => { surface.update(); } )
+
+    drawSprites(); // draw all sprites
+  }
 }
