@@ -5,7 +5,33 @@ class Player {
 
   constructor( x, y, wid, hei ) {
 
+    let oneAnim;
+    this.layers = []; // an array of all layers added to body sprite
 
+    this.body = createSprite( x, y, wid, hei ); this.body.depth = 3; // body is special but not on top
+    this.body.addAnimation( 'normal', 'assets/player_body_0001.png', 'assets/player_body_0002.png' );
+    this.body.setCollider( 'rectangle', 0, -28, 40, 100 );
+
+    this.rightfoot = createSprite( x, y, wid, hei ); this.rightfoot.depth = 2; // right foot is under body sprite
+    oneAnim = this.rightfoot.addAnimation( 'stand', 'assets/player_rightfoot_stand_0001.png', 'assets/player_rightfoot_stand_0002.png' );
+    oneAnim.frameDelay = 8;
+    oneAnim = this.rightfoot.addAnimation( 'walk', 'assets/player_rightfoot_walk_0001.png', 'assets/player_rightfoot_walk_0004.png' );
+    oneAnim.frameDelay = 8;
+    this.layers.push( this.rightfoot ); // add sprite to layers
+
+    this.leftfoot = createSprite( x, y, wid, hei ); this.leftfoot.depth = 4; // left foot is over body sprite
+    oneAnim = this.leftfoot.addAnimation( 'stand', 'assets/player_leftfoot_stand_0001.png', 'assets/player_leftfoot_stand_0002.png' );
+    oneAnim.frameDelay = 8;
+    oneAnim = this.leftfoot.addAnimation( 'walk', 'assets/player_leftfoot_walk_0001.png', 'assets/player_leftfoot_walk_0004.png' );
+    oneAnim.frameDelay = 8;
+    this.layers.push( this.leftfoot ); // add sprite to layers
+
+    this.head = createSprite( x, y, wid, hei ); this.head.depth = 5; // head is over body sprite
+    this.head.addAnimation( 'stand', 'assets/player_head_stand_0001.png', 'assets/player_head_stand_0002.png' );
+    this.head.addAnimation( 'walk', 'assets/player_head_walk_0001.png', 'assets/player_head_walk_0002.png' );
+    this.layers.push( this.head ); // add sprite to layers
+
+    /*
     this.body = createSprite( x, y, wid, hei ); this.body.depth = 2; // body sprite
     this.body.addAnimation( 'stand_good', 'assets/player_body_stand_good_0001.png', 'assets/player_body_stand_good_0002.png' );
     this.body.addAnimation( 'walk_good', 'assets/player_body_walk_good_0001.png', 'assets/player_body_walk_good_0004.png' );
@@ -57,6 +83,7 @@ class Player {
     this.gloves.addAnimation( 'stand_cont', 'assets/player_gloves_stand_cont_0001.png', 'assets/player_gloves_stand_cont_0002.png' );
     this.gloves.addAnimation( 'walk_cont', 'assets/player_gloves_walk_cont_0001.png', 'assets/player_gloves_walk_cont_0004.png' );
     this.layers.push( this.gloves ); // add gloves to layers
+    */
 
     this.isWalking = false; // is the player walking or not?
 
@@ -81,7 +108,7 @@ class Player {
 
   update( goto, obstacles, actionables ) {
 
-    this.body.collide( obstacles ); // collisions with obstacles
+    this.body.collide( obstacles ); // body collides with obstacles
 
     // -- deal with player position/motion relative to goto point --
 
@@ -126,6 +153,20 @@ class Player {
 
     // -- deal with animation in sprites --
 
+    if( this.isWalking ) { // walk animation
+
+      this.rightfoot.changeAnimation( 'walk' );
+      this.leftfoot.changeAnimation( 'walk' );
+      this.head.changeAnimation( 'walk' );
+
+    } else { // stand animation
+
+      this.rightfoot.changeAnimation( 'stand' );
+      this.leftfoot.changeAnimation( 'stand' );
+      this.head.changeAnimation( 'stand' );
+    }
+
+    /*
     if( this.isGownContamined ) this.gown.changeAnimation( 'cont' );
     else this.gown.changeAnimation( 'good' ); // check contamination
 
@@ -187,6 +228,7 @@ class Player {
 
     if( this.hasPhone ) this.phone.visible = true;
     else this.phone.visible = false; // see gown?
+    */
 
     // -- deal with state changes --
 

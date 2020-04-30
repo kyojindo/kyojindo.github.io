@@ -61,7 +61,7 @@ function preload() {
     walls_extruded_back = loadImage( 'assets/walls_extruded_back.png' ); // load walls extrusion image
     walls_extruded_front = loadImage( 'assets/walls_extruded_front.png' ); // load walls extrusion image
 
-    let abs_top = createSprite( 630, 55 );
+    let abs_top = createSprite( 630, 15 );
     abs_top.addAnimation( 'normal', 'assets/abs_top_0001.png', 'assets/abs_top_0002.png' );
     obstacles.add( abs_top ); // add wall as an obstacle
 
@@ -77,19 +77,19 @@ function preload() {
     abs_right.addAnimation( 'normal', 'assets/abs_right_0001.png', 'assets/abs_right_0002.png' );
     obstacles.add( abs_right ); // add wall as an obstacle
 
-    let mid_left = createSprite( 238.5, 376 );
+    let mid_left = createSprite( 238.5, 348.5 );
     mid_left.addAnimation( 'normal', 'assets/mid_left_0001.png', 'assets/mid_left_0002.png' );
     obstacles.add( mid_left ); // add wall as an obstacle
 
-    let mid_right = createSprite( 1022.5, 493 );
+    let mid_right = createSprite( 1022.5, 465.5 );
     mid_right.addAnimation( 'normal', 'assets/mid_right_0001.png', 'assets/mid_right_0002.png' );
     obstacles.add( mid_right ); // add wall as an obstacle
 
-    let hall_left_top = createSprite( 462, 130.5 );
+    let hall_left_top = createSprite( 462, 90.5 );
     hall_left_top.addAnimation( 'normal', 'assets/hall_left_top_0001.png', 'assets/hall_left_top_0002.png' );
     obstacles.add( hall_left_top ); // add wall as an obstacle
 
-    let hall_left_mid = createSprite( 462, 376 );
+    let hall_left_mid = createSprite( 462, 356 );
     hall_left_mid.addAnimation( 'normal', 'assets/hall_left_mid_0001.png', 'assets/hall_left_mid_0002.png' );
     obstacles.add( hall_left_mid ); // add wall as an obstacle
 
@@ -97,11 +97,11 @@ function preload() {
     hall_left_bottom.addAnimation( 'normal', 'assets/hall_left_bottom_0001.png', 'assets/hall_left_bottom_0002.png' );
     obstacles.add( hall_left_bottom ); // add wall as an obstacle
 
-    let hall_right_top  = createSprite( 799, 189 );
+    let hall_right_top  = createSprite( 799, 149 );
     hall_right_top.addAnimation( 'normal', 'assets/hall_right_top_0001.png', 'assets/hall_right_top_0002.png' );
     obstacles.add( hall_right_top ); // add wall as an obstacle
 
-    let hall_right_mid  = createSprite( 799, 518 );
+    let hall_right_mid  = createSprite( 799, 498 );
     hall_right_mid.addAnimation( 'normal', 'assets/hall_right_mid_0001.png', 'assets/hall_right_mid_0002.png' );
     obstacles.add( hall_right_mid ); // add wall as an obstacle
 
@@ -119,7 +119,7 @@ function preload() {
     surfaces.push( virus );
     */
 
-    player = new Player( 1000, 75, 50, 100 ); // load player object
+    player = new Player( gameWidth/2, 100, 115, 140 ); // load player object
   }
 }
 
@@ -128,7 +128,7 @@ function setup() {
   if( !hasTouchScreen ) {
 
     createCanvas( gameWidth, gameHeight );
-    goto = createVector( 1000, 75 );
+    goto = createVector( gameWidth/2, 140 );
 
   } else {
 
@@ -151,8 +151,10 @@ function draw() {
     if( mouseIsPressed ) { goto.x = mouseX; goto.y = mouseY; }
 
     player.update( goto, obstacles, surfaces );
-    obstacles.forEach( ( obstacle ) => { obstacles.debug = mouseIsPressed; } )
     // surfaces.forEach( ( surface ) => { surface.update(); } )
+
+    // obstacles.forEach( ( obstacle ) => { obstacle.debug = mouseIsPressed; } )
+    // player.body.debug = mouseIsPressed;
 
     drawSprites(); // draw all sprites
 
