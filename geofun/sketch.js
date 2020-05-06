@@ -20,6 +20,7 @@ function draw() {
   clear(); noStroke();
   background( 30, 30, 30 );
 
+  textSize( 50 );
   textAlign( CENTER );
   let geoText = "";
 
@@ -34,8 +35,8 @@ function draw() {
     fill( 255, 255, 255 );
   }
 
-  ellipse( width/2, height/2, 100, 100 );
-  text( geoText, width/2, height/2+80 );
+  ellipse( width/2, height/2, 500, 500 );
+  text( geoText, width/2, height/2+350 );
 }
 
 function windowResized() {
